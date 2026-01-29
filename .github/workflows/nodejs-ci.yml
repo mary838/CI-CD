@@ -39,5 +39,7 @@ jobs:
         uses: amondnet/vercel-action@v20
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }} # Added this
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }} # Added this
           vercel-args: "--prod"
-          working-directory: ./ # <-- FIXED, point to your project root
+          working-directory: ./
