@@ -15,31 +15,27 @@ jobs:
         node-version: [18.x]
 
     steps:
-      # 1️⃣ Checkout code
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2️⃣ Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
 
-      # 3️⃣ Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # 4️⃣ Run tests
       - name: Run tests
         run: npm test
 
-      # 5️⃣ Deploy to Vercel (only if tests pass)
+      # 5️⃣ Fixed Deploy Step
       - name: Deploy to Vercel
         if: success()
-        uses: amondnet/vercel-action@v20
+        uses: amondnet/vercel-action@v25 # Updated to v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }} # Added this
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }} # Added this
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }} # MUST MATCH GITHUB SECRET NAME
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }} # MUST MATCH GITHUB SECRET NAME
           vercel-args: "--prod"
           working-directory: ./
