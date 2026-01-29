@@ -40,4 +40,4 @@ jobs:
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-args: "--prod"
-          working-directory: ./
+          working-directory: ./ # <-- FIXED, point to your project root
