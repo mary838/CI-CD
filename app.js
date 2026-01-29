@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 
-app.get("/", (req, res) => res.send("Hello Express!"));
+app.get("/", (req, res) => res.send("Hello Express! CI-CD"));
 
 // Only start server if NOT in test mode
 if (process.env.NODE_ENV !== "test") {
