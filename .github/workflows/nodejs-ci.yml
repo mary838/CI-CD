@@ -31,5 +31,6 @@ jobs:
 
       # 5️⃣ Deploy to Render (Triggered only if tests pass)
       - name: Deploy to Render
-        if: success() && github.event_name == 'push' # Only deploy on actual pushes to main
+        if: success() && github.event_name == 'push'
+        # Ensure the name after 'secrets.' matches your GitHub secret exactly
         run: curl -f ${{ secrets.RENDER_DEPLOY_HOOK }}
