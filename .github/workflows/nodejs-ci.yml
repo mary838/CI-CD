@@ -29,13 +29,7 @@ jobs:
       - name: Run tests
         run: npm test
 
-      # 5️⃣ Fixed Deploy Step
-      - name: Deploy to Vercel
-        if: success()
-        uses: amondnet/vercel-action@v25 # Updated to v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }} # MUST MATCH GITHUB SECRET NAME
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }} # MUST MATCH GITHUB SECRET NAME
-          vercel-args: "--prod"
-          working-directory: ./
+      # 5️⃣ Deploy to Render (Triggered only if tests pass)
+      - name: Deploy to Render
+        if: success() && github.event_name == 'push' # Only deploy on actual pushes to main
+        run: curl -f ${{ secrets.RENDER_DEPLOY_HOOK }}
